@@ -45,6 +45,22 @@ void qsort(int A[], int size) {
 	if (j > 0) { qsort(A, j + 1); }
 	if (i < size) { qsort(&A[i], size - i); }
 }
+void fqsort(Top A[], int size) {
+	int i = 0;
+	int j = size - 1;
+	int mid = A[size / 2].time;
+	do {
+		while (A[i].time < mid) { i++; }
+		while (A[j].time > mid) { j--; }
+		if (i <= j) {
+			swap(A[i], A[j]);
+			i++;
+			j--;
+		}
+	} while (i <= j);
+	if (j > 0) { fqsort(A, j + 1); }
+	if (i < size) { fqsort(&A[i], size - i); }
+}
 int main() {
 	setlocale(LC_ALL, "RUS");
 	system("color F0");
@@ -78,6 +94,8 @@ int main() {
 	clock_t qe = clock();
 	double qt = static_cast<double>(qe - qs); top[2].time = qt;
 	//
-	for (int i = 0; i < 3; i++) { cout << top[i].time << endl; }
+	fqsort(top, 3);
+	cout << "Топ по быстродействию: " << endl;
+	for (int i = 0; i < 3; i++) { cout << i << ") " << top[i].name << ": " << top[i].time << " мс." << endl; }
 	return 0;
 }
