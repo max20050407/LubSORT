@@ -30,18 +30,18 @@ void gsort(int A[], int size) {
 	}
 }
 void qsort(int A[], int size) {
-    int i = 0;
-    int j = size - 1;
-    int mid = A[size / 2];
-    do {
+	int i = 0;
+	int j = size - 1;
+	int mid = A[size / 2];
+	do {
 		while (A[i] < mid) { i++; }
 		while (A[j] > mid) { j--; }
-        if (i <= j) {
+		if (i <= j) {
 			swap(A[i], A[j]);
-            i++;
-            j--;
-        }
-    } while (i <= j);
+			i++;
+			j--;
+		}
+	} while (i <= j);
 	if (j > 0) { qsort(A, j + 1); }
 	if (i < size) { qsort(&A[i], size - i); }
 }
@@ -60,19 +60,19 @@ int main() {
 	Top top[3]{};
 	top[0].name = "Пузырёк"; top[1].name = "Гном"; top[2].name = "Быстрая";
 	//
-	B = A;
+	for (int i = 0; i < size; i++) { B[i] = A[i]; }
 	clock_t bs = clock();
 	bsort(B, size);
 	clock_t be = clock();
 	double bt = static_cast<double>(be - bs); top[0].time = bt;
 	//
-	B = A;
+	for (int i = 0; i < size; i++) { B[i] = A[i]; }
 	clock_t gs = clock();
 	gsort(B, size);
 	clock_t ge = clock();
 	double gt = static_cast<double>(ge - gs); top[1].time = gt;
 	//
-	B = A;
+	for (int i = 0; i < size; i++) { B[i] = A[i]; }
 	clock_t qs = clock();
 	qsort(B, size);
 	clock_t qe = clock();
